@@ -6,7 +6,7 @@ const opButtons = document.querySelectorAll('.op-btn');
 
 let currentOperator = '+';
 
-// Основная функция
+// Функция вычисления
 function calculate() {
     const num1 = parseFloat(firstNumber.textContent);
     const num2 = parseFloat(secondNumber.textContent);
@@ -16,55 +16,81 @@ function calculate() {
         return;
     }
 
-    let output;
+    let calculatedResult;
 
     switch (currentOperator) {
-        case '+': output = num1 + num2; break;
-        case '-': output = num1 - num2; break;
-        case '*': output = num1 * num2; break;
-        case '/': output = num2 === 0 ? 'Ошибка' : num1 / num2; break;
-        default:  output = num1 + num2;
+        case '+':
+            calculatedResult = num1 + num2;
+            break;
+        case '-':
+            calculatedResult = num1 - num2;
+            break;
+        case '*':
+            calculatedResult = num1 * num2;
+            break;
+        case '/':
+            calculatedResult = num2 !== 0 ? num1 / num2 : 'Ошибка';
+            break;
+        default:
+            calculatedResult = num1 + num2;
     }
 
-    result.textContent = output === 'Ошибка'
-        ? output
-        : Math.round(output * 100) / 100;
+    result.textContent =
+        calculatedResult === 'Ошибка'
+            ? calculatedResult
+            : Math.round(calculatedResult * 100) / 100;
 }
 
-// Переключение операторов
-opButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        opButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentOperator = btn.textContent;
+// Обработчики операторов
+opButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        opButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+
+        currentOperator = this.textContent;
         calculate();
     });
 });
 
-// Квадратный корень по клику на результат
-result.addEventListener('click', () => {
-    const value = parseFloat(result.textContent);
-    if (!isNaN(value) && value >= 0) {
-        result.textContent = Math.round(Math.sqrt(value) * 100) / 100;
+// Клик по результату — квадратный корень
+result.addEventListener('click', function () {
+    const currentResult = parseFloat(this.textContent);
+    if (!isNaN(currentResult) && currentResult >= 0) {
+        const sqrtResult = Math.sqrt(currentResult);
+        this.textContent = Math.round(sqrtResult * 100) / 100;
     }
 });
 
-// Активация редактирования чисел
-[firstNumber, secondNumber].forEach(field => {
-    field.addEventListener('click', () => {
-        field.setAttribute('contenteditable', 'true');
-        field.focus();
-    });
-
-    field.addEventListener('blur', () => {
-        field.setAttribute('contenteditable', 'false');
-        calculate();
-    });
-
-    field.addEventListener('input', calculate);
-
-    field.addEventListener('keypress', e => {
-        if (e.key === 'Enter') field.blur();
-    });
+// Редактирование чисел
+firstNumber.addEventListener('click', function () {
+    this.setAttribute('contenteditable', 'true');
+    this.focus();
 });
 
+secondNumber.addEventListener('click', function () {
+    this.setAttribute('contenteditable', 'true');
+    this.focus();
+});
+
+// Пересчёт при изменении
+firstNumber.addEventListener('blur', function () {
+    this.setAttribute('contenteditable', 'false');
+    calculate();
+});
+
+secondNumber.addEventListener('blur', function () {
+    this.setAttribute('contenteditable', 'false');
+    calculate();
+});
+
+firstNumber.addEventListener('input', calculate);
+secondNumber.addEventListener('input', calculate);
+
+// Enter = выход из редактирования
+[firstNumber, secondNumber].forEach(field => {
+    field.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            this.blur();
+        }
+    });
+});
