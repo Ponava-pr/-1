@@ -52,7 +52,6 @@ opButtons.forEach(button => {
     });
 });
 
-// Клик по результату — квадратный корень
 result.addEventListener('click', function () {
     const currentResult = parseFloat(this.textContent);
     if (!isNaN(currentResult) && currentResult >= 0) {
@@ -72,7 +71,7 @@ secondNumber.addEventListener('click', function () {
     this.focus();
 });
 
-// Пересчёт при изменении
+// Пересчёт
 firstNumber.addEventListener('blur', function () {
     this.setAttribute('contenteditable', 'false');
     calculate();
@@ -86,7 +85,7 @@ secondNumber.addEventListener('blur', function () {
 firstNumber.addEventListener('input', calculate);
 secondNumber.addEventListener('input', calculate);
 
-// Enter = выход из редактирования
+// Выход из редактирования
 [firstNumber, secondNumber].forEach(field => {
     field.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
