@@ -19,6 +19,13 @@ body {
     gap: 10px;
 }
 
+.first-row,
+.third-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .number-input {
     font-size: 24px;
     width: 100%;
@@ -28,11 +35,13 @@ body {
     padding: 6px 10px;
     text-align: center;
     background: white;
+    box-sizing: border-box; 
 }
 
 .middle-row {
     display: flex;
     gap: 10px;
+    align-items: center; 
 }
 
 .operators {
@@ -57,7 +66,6 @@ body {
 }
 
 .result {
-    flex: 1;
     font-size: 28px;
     border: 2px solid #ccc;
     background: #fafafa;
@@ -65,11 +73,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    height: 60px;
-}
-
-.third-row {
-    display: flex;
-    justify-content: center;
+    cursor: default; 
+    height: 60px; 
+    flex: 1; 
 }
