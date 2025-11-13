@@ -76,4 +76,5 @@ body {
     cursor: pointer; 
     height: 60px; 
     flex: 1; 
+    user-select: none;
 }
