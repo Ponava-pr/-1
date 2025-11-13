@@ -1,1 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Контейнер */
+.calculator {
+    width: 580px;
+}
+
+/* Первая строка: число + операторы */
+.first-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+/* Третья строка */
+.third-row {
+    display: flex;
+    margin-top: 5px;
+}
+
+/* Поля с числами */
+.number-input {
+    width: 120px;
+    height: 45px;
+    font-size: 26px;
+    border: 1px solid black;
+    padding: 5px;
+    text-align: left;
+    outline: none;
+}
+
+/* Кнопки операторов */
+.operators {
+    display: flex;
+    margin-left: 5px;
+}
+
+.op-btn {
+    width: 90px;
+    height: 45px;
+    background: linear-gradient(to bottom, #8ab2ff, #003cff);
+    border: none;
+    margin-right: 3px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+.op-btn.active {
+    outline: 3px solid white;
+    border: 2px solid blue;
+}
+
+/* Результат */
+.second-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.result {
+    width: 140px;
+    height: 95px;
+    border: 1px solid black;
+    font-size: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
